@@ -26,7 +26,7 @@ var mapPath = d3.geoPath()
 
 var colorLegend = svg.append("g")
                      .attr("class","legend")
-
+var units = {"UN_population":"", "At_risk":"%","At_high_risk":"%","Suspected_malaria_cases":"",'Malaria_cases':""}
 
 // Use the Queue.js library to read two files
 queue()
@@ -113,15 +113,43 @@ color.domain([min,max]);
   
   console.log(max);
   console.log(min);
+
+  var range = Array.from(Array(detailLevel).keys())
+  var legend = []
+  range.forEach(e =>
+    legend.push((e+1)/detailLevel)
+    );
+
+
+  var t = d3.transition()
+  .duration(2000);
+
+  // Draw legends
+  var squares = svg.selectAll("rect")
+                .data(legend, function(d){return d})
+  squares.enter()
+        .append("rect")
+
+        .merge(squares)
+        .transition(t)
+        .attr("class","legend")
+        .attr("x", 660)
+        .attr("y", function(d,i){return 300 + detailLevel * 10 - 20 * i})
+        .attr("width",20)
+        .attr("height",20)
+        .style("fill",'#ff3e55')
+        .style("opacity",function(d){return d})
+  squares.exit().remove()
+
   var blocks = svg.selectAll("path")
             .data(africa)
 
-
+  // Draw map blocks
   blocks.enter()
   .append("path")
 
   .merge(blocks)
-  .transition(2000)
+  .transition(t)
   .attr("class","map")
   .attr("d", mapPath)
   .style("fill", function(d){
