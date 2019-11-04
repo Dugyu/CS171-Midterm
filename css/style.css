@@ -1,0 +1,42 @@
+
+/* YOUR CSS STYLES */
+
+body{
+    font-family: proxima-nova-condensed, sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    color: #ff3e55;
+}
+
+.map path{
+  stroke-width: 0.5;
+  stroke:#ff3e55;
+}
+/*************/
+  /*    FORM   */
+  /*************/
+  
+  .form-inline {
+    margin-bottom: 30px;
+    float: right;
+    margin-left: 10px;
+  }
+  
+  .form-control {
+    background: #ff3e55;
+    border: 1px solid #ff3e55;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #ff3e55;
+    width: 280px;
+    color:white;
+  }
+  .form-control:focus {
+    background: #ff3e55;
+    border: 1px solid #ff3e55;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #ff3e55;
+    color:white;
+  }
+
+  .form-group label {
+    font-weight: 300;
+    margin-right: 10px;
+  }
