@@ -1,5 +1,5 @@
 // --> CREATE SVG DRAWING AREA
-var width = 800;
+var width = 600;
 var height = 600;
 
 var svg = d3.select("#chart-area1").append("svg")
@@ -20,12 +20,14 @@ var detailLevel = parseInt(d3.select("#detail-level").property("value"));
 var projection = d3.geoMercator()
     .translate([width / 2, height / 2])
     .scale(350)
-    .center([20,0])    
+    .center([27,0])    
 var mapPath = d3.geoPath()
     .projection(projection)
 
 var colorLegend = svg.append("g")
                      .attr("class","legend")
+var colorLegendText = svg.append("g")
+                   .attr("class","legend-text")
 var units = {"UN_population":"", "At_risk":"%","At_high_risk":"%","Suspected_malaria_cases":"",'Malaria_cases':""}
 
 // Use the Queue.js library to read two files
@@ -102,15 +104,12 @@ function updateChoropleth() {
   
 if (measure == "UN_population"){
   color = d3.scaleLog().range([0,1]);
-
 }
 else{
   color = d3.scaleLinear().range([0,1]);
-
 }
-
-color.domain([min,max]);
-  
+//color = d3.scaleLinear().range([0,1]);
+color.domain([min,max])
   console.log(max);
   console.log(min);
 
@@ -124,8 +123,9 @@ color.domain([min,max]);
   var t = d3.transition()
   .duration(2000);
 
+  
   // Draw legends
-  var squares = svg.selectAll("rect")
+  var squares = colorLegend.selectAll("rect")
                 .data(legend, function(d){return d})
   squares.enter()
         .append("rect")
@@ -133,8 +133,8 @@ color.domain([min,max]);
         .merge(squares)
         .transition(t)
         .attr("class","legend")
-        .attr("x", 660)
-        .attr("y", function(d,i){return 300 + detailLevel * 10 - 20 * i})
+        .attr("x", 520)
+        .attr("y", function(d,i){return 280 + detailLevel * 10 - 20 * i})
         .attr("width",20)
         .attr("height",20)
         .style("fill",'#ff3e55')
@@ -143,6 +143,27 @@ color.domain([min,max]);
 
   var blocks = svg.selectAll("path")
             .data(africa)
+
+// Draw legend texts
+    legendextend = Array.from(legend); // add 0 to front
+    legendextend.unshift(0.0);
+    console.log(legendextend);
+    
+    var legendtexts = colorLegendText.selectAll("text")
+                .data(legendextend, function(d){return d})
+    
+    legendtexts.enter()
+              .append("text")
+
+              .merge(legendtexts)
+              .transition(t)
+              .attr("class","legend-text")
+              .attr("x", 550)
+              .attr("y", function(d,i){return 285 + detailLevel * 10 - 20 * (i-1)})
+              .style("fill","#aaaaaa")
+              .text(function(d){return d3.format(".2s")(color.invert(d)) + units[measure]})
+    legendtexts.exit().remove()
+
 
   // Draw map blocks
   blocks.enter()
@@ -172,7 +193,7 @@ color.domain([min,max]);
           return 1.0;
         }
         else{
-          return Math.ceil(color(value) * detailLevel) / detailLevel;
+          return (Math.floor(color(value)*detailLevel) + 1) / detailLevel;
         }
       }else{
       return 1.0;
