@@ -7,11 +7,25 @@ body{
     font-style: normal;
     color: #ff3e55;
 }
-
+p.quote{
+  font-size: 24px;
+}
+p.keyfact{
+  font-size: 30px;
+  font-weight: 400;
+  color:#aaaaaa;
+}
+b.stress{
+ color:#ff3e55;
+}
+u.stress{
+  color:#ff3e55;
+}
 .map path{
   stroke-width: 0.5;
   stroke:#ff3e55;
 }
+
 /*************/
   /*    FORM   */
   /*************/
