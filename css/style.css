@@ -8,13 +8,21 @@ body{
     color: #ff3e55;
 }
 p.quote{
-  font-size: 24px;
+  font-size: 22px;
 }
 p.keyfact{
   font-size: 30px;
   font-weight: 400;
   color:#aaaaaa;
 }
+p{
+  font-size: 22px;
+}
+p.imgtext{
+  font-size: 14px;
+  color:#bbbbbb;
+}
+
 b.stress{
  color:#ff3e55;
 }

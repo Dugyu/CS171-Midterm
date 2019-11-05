@@ -61,7 +61,7 @@ queue()
     }) 
 
     console.log(countryDataById);
-  console.log(africa);
+    console.log(africa);
     // Update choropleth
     updateChoropleth();
     initializeTooltip();   
