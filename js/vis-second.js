@@ -15,8 +15,10 @@ var visual = d3.select("#chart-area2").append("svg")
 visual.append('g').attr("class","axis x-axis");
 visual.append('g').attr("class","axis y-axis")
 
+//Global Values
 var globalDataById = [];
-
+var highlight = d3.select("#highlight").property("value");
+console.log(highlight)
 queue()
     .defer(d3.csv, "data/global-malaria-2015.csv")
     .await(function(error, malariaDataCsv){
@@ -42,8 +44,8 @@ queue()
     })
 
 function updateVisualization(){
-    console.log(globalDataById);
-
+    highlight = d3.select("#highlight").property("value");
+    console.log(highlight);
     var xmax = d3.max(globalDataById, function(d){
         var value = d.Malaria_cases;
         if (isNaN(value)){value = -Math.Infinity;}
@@ -95,11 +97,12 @@ function updateVisualization(){
 
 
 
-    visual.selectAll("circle")
-	.append("g")
-    .data(globalDataById)
-	.enter()
+    var circles = visual.selectAll("circle")
+                    .data(globalDataById)
+	circles.enter()
     .append("circle")
+    .merge(circles)
+    .transition(200)
     .attr("r", function(d){
 			return size(d.UN_population);
     })
@@ -113,10 +116,15 @@ function updateVisualization(){
         return cy;
     })
 	.attr("fill", function(d){
-        if (d.WHO_region == "African"){
+        if (d.WHO_region == highlight){
             return '#ff3e55';
         }
 		return "#888888";
     })
-    .attr("opacity",0.5);
+    .attr("opacity",0.8);
 }
+
+
+d3.select("#highlight").on("change", function(){
+    updateVisualization();
+  });

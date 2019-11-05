@@ -61,4 +61,11 @@ u.stress{
   .form-group label {
     font-weight: 300;
     margin-right: 10px;
+    margin-left: 10px;
+  }
+
+  .chart-title{
+    fill:#ff3e55;
+    font-size: 18px;
+    text-anchor: end;
   }

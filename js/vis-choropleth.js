@@ -33,6 +33,14 @@ var colorLegend = svg.append("g")
                      .attr("class","legend")
 var colorLegendText = svg.append("g")
                    .attr("class","legend-text")
+var colorTitle = svg.append("text").attr("class","chart-title")
+.transition(20)
+.attr("x",580)
+.attr('y',20)
+.text("Malaria 2015 in Africa")
+
+
+
 // legend units
 var units = {"UN_population":"", "At_risk":"%","At_high_risk":"%","Suspected_malaria_cases":"",'Malaria_cases':""}
 
