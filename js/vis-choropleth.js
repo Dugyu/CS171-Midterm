@@ -118,7 +118,6 @@ function updateChoropleth() {
 
   // unify transition speed
   var t = d3.transition().duration(2000);
-
   // prepare data for drawing legend squares
   var range = Array.from(Array(detailLevel).keys())
   var legend = []

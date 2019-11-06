@@ -17,12 +17,18 @@ p.keyfact{
 }
 p{
   font-size: 22px;
+  color: #aaaaaa;
 }
 p.imgtext{
   font-size: 14px;
   color:#bbbbbb;
 }
-
+b{
+  color:#ff3e55;
+}
+u{
+  color:#ff3e55;
+}
 b.stress{
  color:#ff3e55;
 }
@@ -68,4 +74,15 @@ u.stress{
     fill:#ff3e55;
     font-size: 18px;
     text-anchor: end;
+  }
+
+  .chart-title-2{
+    fill:#ff3e55;
+    font-size: 18px;
+    text-anchor: end;
+  }
+
+  p.name{
+    font-size: 14px;
+    font-weight:300;
   }
