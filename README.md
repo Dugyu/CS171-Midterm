@@ -1,1 +1,1 @@
-# CS171-Mideterm
+# CS171-Midterm
